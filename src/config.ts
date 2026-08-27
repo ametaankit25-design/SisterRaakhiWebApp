@@ -32,7 +32,7 @@ export interface AppConfig {
     subtitle: string;
     songTitle: string;
     songArtist: string;
-    songUrl: string; // URL or path to mp3 in /public/song.mp3
+    songUrl: string; // URL or path to mp3 in /public/
     defaultDurationSeconds: number; // Fallback if audio metadata takes time to load
     danceMoves: {
       name: string;
@@ -160,12 +160,11 @@ export const config: AppConfig = {
 
   danceChallenge: {
     title: "The Sibling Dance Trial 💃🎶",
-    subtitle: "Dance to the full song while recording your performance to unlock your gift!",
-    songTitle: "Festive Rakhi Celebration Track",
-    songArtist: "Upbeat Sibling Dance Beats",
-    // Upbeat energetic Bollywood/Bhangra celebratory track stream
-    songUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=bollywood-dance-105156.mp3",
-    defaultDurationSeconds: 180, // Dynamic: automatically syncs with actual song duration
+    subtitle: "Dance to 'Bhaiya Mere Rakhi Ke Bandhan Ko' while recording your performance to unlock your gift!",
+    songTitle: "Bhaiya Mere Rakhi Ke Bandhan Ko Nibhana",
+    songArtist: "Lata Mangeshkar (Chhoti Bahen)",
+    songUrl: "/Bhaiya Mere Rakhi Ke Bandhan Ko Chhoti Bahen 320 Kbps.mp3",
+    defaultDurationSeconds: 215, // Automatically synchronizes with audio duration
     danceMoves: [
       { name: "The Thumka Twist", emoji: "💃", hint: "Show off those energetic festive steps!" },
       { name: "Bhangra Shoulder Bounce", emoji: "🕺", hint: "Balle Balle hands in the air!" },
