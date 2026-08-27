@@ -158,10 +158,10 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
                   sounds.playClick();
                   setSelectedOption(option.id);
                 }}
-                className={`w-full text-left p-3 rounded-2xl border-2 transition-all flex items-start gap-2.5 active:scale-[0.99] ${borderClass}`}
+                className={`w-full text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 active:scale-[0.99] ${borderClass}`}
               >
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 border ${
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 border ${
                     isSelected
                       ? 'bg-rose-600 text-white border-rose-600'
                       : 'bg-slate-100 text-slate-600 border-slate-300'
@@ -170,14 +170,9 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
                   {option.id}
                 </div>
                 <div className="flex-1">
-                  <div className="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
+                  <div className="text-sm font-bold text-slate-900 leading-snug">
                     {option.label}
                   </div>
-                  {option.subtitle && (
-                    <div className="text-[11px] text-slate-500 mt-0.5">
-                      {option.subtitle}
-                    </div>
-                  )}
                 </div>
               </button>
             );

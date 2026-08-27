@@ -9,7 +9,6 @@ export interface QuizQuestion {
   options: {
     id: string;
     label: string;
-    subtitle?: string;
   }[];
   correctAnswerId: string;
   successMessage: string;
@@ -52,7 +51,7 @@ export interface AppConfig {
 }
 
 export const config: AppConfig = {
-  sisterName: "Rakshi",
+  sisterName: "Riya",
   brotherName: "Ankit",
   appName: "Raksha Bandhan Gift Challenge",
   tagline: "The Official Sibling Verification & Gift Quest 🎁✨",
@@ -64,96 +63,94 @@ export const config: AppConfig = {
       {
         id: 1,
         photoUrl: "/photos/IMG_20230403_165757312.jpg",
-        question: "1. Who is this handsome mastermind in this memory?",
-        description: "Exhibit 1: Look closely at this legendary photo...",
+        question: "1. Ye Kaunsi Jagah ka photo hai?",
+        description: "Exhibit 1: Look closely at this photo...",
         options: [
-          { id: "A", label: "Your favorite & most generous brother (Ankit)", subtitle: "The one who always saves you from scoldings" },
-          { id: "B", label: "A Bollywood superstar on holiday", subtitle: "Looks like one, but guess again!" },
-          { id: "C", label: "A random handsome stranger with high IQ", subtitle: "Flattering, but pick the official title!" },
-          { id: "D", label: "Your personal 24/7 snack delivery agent", subtitle: "True, but pick option A!" },
+          { id: "A", label: "Irrigation Garden" },
+          { id: "B", label: "Annpurna Mataji" },
+          { id: "C", label: "Nau Chowki" },
+          { id: "D", label: "Tiloli" },
         ],
-        correctAnswerId: "A",
-        successMessage: "🎉 Correct! Okay, you recognized your brother in Photo #1!",
+        correctAnswerId: "B",
+        successMessage: "🎉 Correct! Annpurna Mataji is the right answer!",
         wrongMessages: [
           "😂 WRONG! Seriously, sis? Look at the photo again!",
-          "👀 Are you blind? That's your one and only brother! Try again.",
+          "👀 Are you blind? Try again!",
           "🤦‍♂️ Don't make me deduct 20% of your gift value! Guess right!"
         ]
       },
       {
         id: 2,
         photoUrl: "/photos/IMG_20230524_103516594.jpg",
-        question: "2. What is brother Ankit's #1 superpower when you are in trouble?",
-        description: "Exhibit 2: Sibling emergency defense protocol...",
+        question: "2. In which year was this photo taken?",
+        description: "Exhibit 2: Check your memory...",
         options: [
-          { id: "A", label: "Secretly bringing snacks & backing you up against mom", subtitle: "The ultimate sibling shield!" },
-          { id: "B", label: "Saying 'I told you so' exactly 50 times", subtitle: "He might tease, but he saves you first" },
-          { id: "C", label: "Blaming the innocent house cat", subtitle: "A good tactic, but not the main superpower" },
-          { id: "D", label: "Disappearing into thin air", subtitle: "Never! He's always got your back" },
+          { id: "A", label: "2024" },
+          { id: "B", label: "2021" },
+          { id: "C", label: "2022" },
+          { id: "D", label: "2023" },
         ],
-        correctAnswerId: "A",
-        successMessage: "🌟 Bingo! That's what brothers are for!",
+        correctAnswerId: "D",
+        successMessage: "🌟 Bingo! 2023 is correct!",
         wrongMessages: [
-          "🤣 Wrong! Have some faith in your brother!",
-          "👀 Nope! Think about who always saves your back!",
-          "🤦‍♀️ Wrong answer! Try again before mom finds out!"
+          "🤣 Wrong year! Think carefully!",
+          "👀 Nope! Try remembering when we took this!",
+          "🤦‍♀️ Wrong answer! Try again!"
         ]
       },
       {
         id: 3,
         photoUrl: "/photos/IMG_20230529_183743713.jpg",
-        question: "3. Who always ends up winning the TV remote / snack battle at home?",
-        description: "Exhibit 3: The eternal household battle...",
+        question: "3. Which month was this photo taken?",
+        description: "Exhibit 3: Seasonal memory test...",
         options: [
-          { id: "A", label: "Obviously Sis (because she complains to mom & dad!)", subtitle: "Undefeated champion with parental backup" },
-          { id: "B", label: "Brother (through sheer intellectual dominance)", subtitle: "He lets you win to keep peace!" },
-          { id: "C", label: "The WiFi Router", subtitle: "When internet goes down, everyone loses" },
-          { id: "D", label: "Nobody, TV stays on news channel", subtitle: "Dad's favorite trick" },
+          { id: "A", label: "May" },
+          { id: "B", label: "April" },
+          { id: "C", label: "January" },
+          { id: "D", label: "December" },
         ],
-        correctAnswerId: "A",
-        successMessage: "😂 100% True! Sibling drama at its finest!",
+        correctAnswerId: "B",
+        successMessage: "😂 Correct! April it is!",
         wrongMessages: [
-          "😆 Haha nice try, but we all know who cries to mom!",
-          "❌ Incorrect! You always steal the remote!",
+          "😆 Haha nice try, but wrong month!",
+          "❌ Incorrect! Guess again!",
           "🤔 Recheck the memory banks, sis!"
         ]
       },
       {
         id: 4,
         photoUrl: "/photos/IMG_20230529_190348338.jpg",
-        question: "4. What is the official Rakhi tax rate Ankit owes you today?",
-        description: "Exhibit 4: Financial negotiations under section 420...",
+        question: "4. Who came with us on this trip?",
+        description: "Exhibit 4: Travel crew verification...",
         options: [
-          { id: "A", label: "100% of his love + an awesome secret gift! 🎁", subtitle: "Fair trade for a sacred Rakhi thread!" },
-          { id: "B", label: "Just 10 rupees and a half-eaten chocolate", subtitle: "Inflation is real, but not that bad!" },
-          { id: "C", label: "A warm handshake and best wishes", subtitle: "Zero chance you'd accept this!" },
-          { id: "D", label: "A promise to do all your chores for a year", subtitle: "Dream on, sis!" },
+          { id: "A", label: "Only both of us" },
+          { id: "B", label: "Kisu" },
+          { id: "C", label: "Kushal" },
+          { id: "D", label: "Himanshu" },
         ],
-        correctAnswerId: "A",
-        successMessage: "💰 Approved! Your gift package is fully sponsored!",
+        correctAnswerId: "D",
+        successMessage: "💰 Exactly! Himanshu came along!",
         wrongMessages: [
-          "😂 Don't sell yourself cheap! Pick the real deal!",
-          "👀 Wrong! Think bigger, sis!",
-          "❌ Tax calculation error! Try again."
+          "😂 Wrong person! Think who accompanied us!",
+          "👀 Wrong! Try again, sis!",
+          "❌ Incorrect! Guess again."
         ]
       },
       {
         id: 5,
         photoUrl: "/photos/IMG_20231129_072341931.jpg",
-        question: "5. No matter how much we tease each other, who is your forever protector & favorite brother?",
-        description: "Exhibit 5: The final bond verification...",
+        question: "5. Kya is vakt papa ka hair transplant ho gya tha?",
+        description: "Exhibit 5: The final observation test...",
         options: [
-          { id: "A", label: "My brother Ankit ❤️ (The best brother in the universe!)", subtitle: "Forever and always, no matter what!" },
-          { id: "B", label: "Google AI Chatbot", subtitle: "AI is cool, but cannot give physical gifts!" },
-          { id: "C", label: "The delivery guy with pizza", subtitle: "Close second, but brother ranks #1!" },
-          { id: "D", label: "My favorite bedroom pillow", subtitle: "Comfy, but not family!" },
+          { id: "A", label: "Haa" },
+          { id: "B", label: "Nhi" },
         ],
         correctAnswerId: "A",
-        successMessage: "🎉 5/5 PERFECT SCORE! You have officially conquered all 5 Photo Trials!",
+        successMessage: "🎉 5/5 PERFECT SCORE! You have conquered all 5 Photo Trials!",
         wrongMessages: [
-          "💔 Ouch! That hurt brother's feelings! Pick the right one!",
-          "🥺 Seriously? After all these years? Try again!",
-          "😂 Nice joke! Now choose your brother!"
+          "💔 Look closely at the photo and guess again!",
+          "🥺 Wrong! Try again!",
+          "😂 Galat javab! Sahi answer choose karo!"
         ]
       }
     ]
@@ -161,7 +158,7 @@ export const config: AppConfig = {
 
   danceChallenge: {
     title: "The 10-Minute Dance Challenge 💃",
-    subtitle: "The 5 photo tests were passed. Now let's see your real Rakhi celebration moves!",
+    subtitle: "All 5 photo tests were passed. Now let's see your celebration dance!",
     durationSeconds: 600, // 10 minutes (600 seconds)
     videoUrl: "https://www.youtube-nocookie.com/embed/HqUeS3m5igI?autoplay=1&mute=0&loop=1&playlist=HqUeS3m5igI",
     danceMoves: [
@@ -183,7 +180,7 @@ export const config: AppConfig = {
   giftReveal: {
     clue: "Where your warm winter jackets sleep and childhood memories hide...",
     locationText: "📍 Look inside the top cupboard in Mom & Dad's bedroom, hidden behind the royal blue winter bag!",
-    personalMessageTitle: "Happy Raksha Bandhan, Sis! ❤️",
+    personalMessageTitle: "Happy Raksha Bandhan, Riya! ❤️",
     personalMessageBody: "No matter how much we fight over the TV remote, tease each other, or argue over who is mom's favorite... you'll always be my dearest sister, and I will always have your back no matter where life takes us. Thank you for always tying the most precious Rakhi on my wrist!",
     brotherSignature: "With all my love & protection,\nYour Brother, Ankit ❤️",
     giftItemHint: "A shiny package wrapped with a golden ribbon is waiting for you! 🎀"
