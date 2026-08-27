@@ -12,8 +12,8 @@ const HOST = '0.0.0.0';
 // Serve static assets from Vite dist directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// SPA Fallback: send index.html for all other routes
-app.get('*', (_req, res) => {
+// SPA Fallback: send index.html for all other routes (Express 5 & 4 compatible)
+app.use((_req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
