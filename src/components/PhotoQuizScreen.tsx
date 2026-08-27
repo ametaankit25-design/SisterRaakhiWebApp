@@ -10,20 +10,25 @@ interface PhotoQuizScreenProps {
 }
 
 export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPassQuiz }) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'wrong' | 'correct'>('idle');
   const [wrongMessage, setWrongMessage] = useState<string>('');
 
-  const handleSubmit = () => {
-    if (!selectedOption) return;
+  const currentQuestion = config.questions[currentQuestionIndex];
+  const totalQuestions = config.questions.length;
+  const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
 
-    if (selectedOption === config.correctAnswerId) {
+  const handleSubmit = () => {
+    if (!selectedOption || !currentQuestion) return;
+
+    if (selectedOption === currentQuestion.correctAnswerId) {
       sounds.playSuccess();
       setStatus('correct');
-      // Fire vibrant confetti bursts
+      // Fire celebratory confetti bursts
       confetti({
-        particleCount: 70,
-        spread: 60,
+        particleCount: isLastQuestion ? 120 : 60,
+        spread: isLastQuestion ? 80 : 55,
         origin: { y: 0.6 },
         colors: ['#FF4D8D', '#F59E0B', '#7C3AED', '#10B981', '#F43F5E'],
       });
@@ -31,8 +36,9 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
       sounds.playWrong();
       setStatus('wrong');
       const randomMsg =
-        config.wrongMessages[Math.floor(Math.random() * config.wrongMessages.length)] ||
-        '😂 WRONG! Seriously, sis? Your gift is judging you!';
+        currentQuestion.wrongMessages[
+          Math.floor(Math.random() * currentQuestion.wrongMessages.length)
+        ] || '😂 WRONG! Seriously, sis? Your gift is judging you!';
       setWrongMessage(randomMsg);
     }
   };
@@ -43,55 +49,92 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
     setStatus('idle');
   };
 
+  const handleNextQuestion = () => {
+    sounds.playClick();
+    if (isLastQuestion) {
+      onPassQuiz();
+    } else {
+      setCurrentQuestionIndex((prev) => prev + 1);
+      setSelectedOption(null);
+      setStatus('idle');
+    }
+  };
+
+  if (!currentQuestion) return null;
+
   return (
     <div className="w-full flex flex-col items-center animate-fadeIn">
-      {/* Quiz Header */}
-      <div className="text-center mb-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-[11px] font-black uppercase tracking-wider mb-1 border border-rose-200">
-          <Camera className="w-3.5 h-3.5 text-rose-600" /> Challenge 1 of 2
+      {/* Quiz Progress & Header */}
+      <div className="text-center mb-3 w-full">
+        <div className="flex items-center justify-between px-1 mb-1.5">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-[11px] font-black uppercase tracking-wider border border-rose-200">
+            <Camera className="w-3.5 h-3.5 text-rose-600" /> Question {currentQuestionIndex + 1} of {totalQuestions}
+          </div>
+          <span className="text-xs font-black text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-200">
+            {Math.round(((currentQuestionIndex + 1) / totalQuestions) * 100)}% Done
+          </span>
         </div>
+
+        {/* Mini 5-dot Progress Bar */}
+        <div className="flex items-center gap-1.5 w-full mb-2">
+          {config.questions.map((q, idx) => (
+            <div
+              key={q.id}
+              className={`h-2 flex-1 rounded-full transition-all duration-300 ${
+                idx < currentQuestionIndex
+                  ? 'bg-emerald-500'
+                  : idx === currentQuestionIndex
+                  ? 'bg-rose-500 ring-2 ring-rose-300'
+                  : 'bg-rose-200/80'
+              }`}
+            />
+          ))}
+        </div>
+
         <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-          📸 The Photo Verification
+          📸 {config.title}
         </h2>
         <p className="text-xs text-slate-600 mt-0.5">
-          {config.description}
+          {currentQuestion.description}
         </p>
       </div>
 
       {/* Quiz Card */}
       <div className="glass-panel w-full rounded-3xl p-4 sm:p-5 shadow-xl border border-rose-100 mb-4 relative">
         {/* Photo Container */}
-        <div className="relative w-full aspect-[16/10] sm:h-60 rounded-2xl overflow-hidden shadow-inner border-2 border-rose-200 mb-3.5 bg-slate-900 flex items-center justify-center">
+        <div className="relative w-full aspect-[16/10] sm:h-56 rounded-2xl overflow-hidden shadow-inner border-2 border-rose-200 mb-3.5 bg-slate-900 flex items-center justify-center">
           <img
-            src={config.photoUrl}
-            alt="Quiz Target"
-            className="w-full h-full object-cover"
+            key={currentQuestion.photoUrl}
+            src={currentQuestion.photoUrl}
+            alt={`Quiz Photo ${currentQuestionIndex + 1}`}
+            className="w-full h-full object-cover animate-fadeIn"
+            loading="eager"
           />
           {/* Subtle watermark badge */}
           <div className="absolute bottom-2 right-2 bg-slate-900/80 backdrop-blur-sm text-yellow-300 text-[10px] font-bold px-2 py-0.5 rounded-md border border-yellow-400/30">
-            🔒 Sibling Memory #001
+            🔒 Trial Photo #{currentQuestionIndex + 1}
           </div>
         </div>
 
-        {/* Question */}
+        {/* Question Title */}
         <div className="mb-3 text-left">
           <label className="text-sm sm:text-base font-extrabold text-slate-900 block mb-0.5">
-            {config.question}
+            {currentQuestion.question}
           </label>
           <span className="text-[11px] text-slate-500">
-            Choose the correct option:
+            Select the single true answer:
           </span>
         </div>
 
         {/* Options */}
         <div className="space-y-2 mb-4">
-          {config.options.map((option) => {
+          {currentQuestion.options.map((option) => {
             const isSelected = selectedOption === option.id;
             let borderClass = 'border-slate-200 hover:border-rose-300 bg-white';
             if (isSelected) {
               borderClass = 'border-rose-500 bg-rose-50/95 shadow-sm ring-2 ring-rose-300';
             }
-            if (status === 'correct' && option.id === config.correctAnswerId) {
+            if (status === 'correct' && option.id === currentQuestion.correctAnswerId) {
               borderClass = 'border-emerald-500 bg-emerald-50 text-emerald-950 ring-2 ring-emerald-300';
             }
 
@@ -154,19 +197,16 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
           <div className="p-3.5 rounded-2xl bg-emerald-100 border-2 border-emerald-300 text-emerald-950 mb-3.5 animate-fadeIn">
             <div className="flex items-center gap-1.5 font-black text-xs sm:text-sm text-emerald-800 mb-1">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              CHALLENGE 1 PASSED! ✓
+              {isLastQuestion ? 'ALL 5 QUIZZES CONQUERED! ✓' : `QUESTION ${currentQuestionIndex + 1} PASSED! ✓`}
             </div>
             <p className="text-xs font-semibold leading-relaxed mb-2.5">
-              {config.successMessage}
+              {currentQuestion.successMessage}
             </p>
             <button
-              onClick={() => {
-                sounds.playClick();
-                onPassQuiz();
-              }}
+              onClick={handleNextQuestion}
               className="shimmer-btn w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs sm:text-sm font-black shadow-md transition-all flex items-center justify-center gap-2 active:scale-95"
             >
-              <span>NEXT: THE DANCE CHALLENGE</span>
+              <span>{isLastQuestion ? 'PROCEED TO DANCE TRIAL 💃' : `NEXT QUESTION (${currentQuestionIndex + 2}/${totalQuestions}) →`}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
