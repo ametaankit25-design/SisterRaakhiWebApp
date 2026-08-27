@@ -24,7 +24,7 @@ export function App() {
   const [appConfig] = useState<AppConfig>(defaultConfig);
   const [currentStep, setCurrentStep] = useState<FlowStep>('landing');
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [testMode, setTestMode] = useState<boolean>(true); // Fast demo toggle
+  const [testMode, setTestMode] = useState<boolean>(false); // Default to false: Real 10-minute timer for sister!
 
   // Automatically scroll to top whenever changing steps for smooth mobile UX
   useEffect(() => {
