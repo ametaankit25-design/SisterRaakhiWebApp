@@ -182,8 +182,8 @@ export const config: AppConfig = {
   },
 
   giftReveal: {
-    clue: "khud dhundh le",
-    locationText: "Gift chahiye to poore ghar me dhundh le nhi to kisi gareeb ko de dunga!",
+    clue: "paiso ke paas",
+    locationText: "Gift peso ke bahut nazdeek pada he!",
     personalMessageTitle: "Happy Raksha Bandhan, Riya! ❤️",
     personalMessageBody: "No matter how much we fight over the TV remote, tease each other, or argue over who is mom's favorite... you'll always be my dearest sister, and I will always have your back no matter where life takes us. Thank you for always tying the most precious Rakhi on my wrist!",
     brotherSignature: "With all my love & protection,\nYour Brother, Ankit ❤️",
