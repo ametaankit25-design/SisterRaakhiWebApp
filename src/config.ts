@@ -30,8 +30,10 @@ export interface AppConfig {
   danceChallenge: {
     title: string;
     subtitle: string;
-    durationSeconds: number; // 600s = 10 minutes (or quick demo test mode)
-    videoUrl?: string; // YouTube embed or custom video
+    songTitle: string;
+    songArtist: string;
+    songUrl: string; // URL or path to mp3 in /public/song.mp3
+    defaultDurationSeconds: number; // Fallback if audio metadata takes time to load
     danceMoves: {
       name: string;
       emoji: string;
@@ -157,12 +159,15 @@ export const config: AppConfig = {
   },
 
   danceChallenge: {
-    title: "The 10-Minute Dance Challenge 💃",
-    subtitle: "All 5 photo tests were passed. Now let's see your celebration dance!",
-    durationSeconds: 600, // 10 minutes (600 seconds)
-    videoUrl: "https://www.youtube-nocookie.com/embed/HqUeS3m5igI?autoplay=1&mute=0&loop=1&playlist=HqUeS3m5igI",
+    title: "The Sibling Dance Trial 💃🎶",
+    subtitle: "Dance to the full song while recording your performance to unlock your gift!",
+    songTitle: "Festive Rakhi Celebration Track",
+    songArtist: "Upbeat Sibling Dance Beats",
+    // Upbeat energetic Bollywood/Bhangra celebratory track stream
+    songUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=bollywood-dance-105156.mp3",
+    defaultDurationSeconds: 180, // Dynamic: automatically syncs with actual song duration
     danceMoves: [
-      { name: "The Thumka Twist", emoji: "💃", hint: "Show off those energetic wedding steps!" },
+      { name: "The Thumka Twist", emoji: "💃", hint: "Show off those energetic festive steps!" },
       { name: "Bhangra Shoulder Bounce", emoji: "🕺", hint: "Balle Balle hands in the air!" },
       { name: "Desi Girl Swag", emoji: "✨", hint: "High energy waist twirls!" },
       { name: "Gift Victory Shimmy", emoji: "🎁", hint: "Dance like the gift is already in your hands!" }
