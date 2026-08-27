@@ -105,17 +105,19 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
 
       {/* Quiz Card */}
       <div className="glass-panel w-full rounded-3xl p-4 sm:p-5 shadow-xl border border-rose-100 mb-4 relative">
-        {/* Photo Container with Light Subtle Blur */}
+        {/* Photo Container with Direct Inline Blur */}
         <div className="relative w-full aspect-[16/10] sm:h-60 rounded-2xl overflow-hidden shadow-inner border-2 border-rose-200 mb-3.5 bg-slate-900 flex items-center justify-center">
           <img
             key={currentQuestion.photoUrl}
             src={currentQuestion.photoUrl}
             alt={`Quiz Photo ${currentQuestionIndex + 1}`}
-            className={`w-full h-full object-cover transition-all duration-500 ease-out ${
-              isRevealed
-                ? 'filter-none scale-100'
-                : 'filter blur-[5px] scale-[1.02]'
-            }`}
+            className="w-full h-full object-cover transition-all duration-600 ease-out"
+            style={{
+              filter: isRevealed ? 'none' : 'blur(10px)',
+              WebkitFilter: isRevealed ? 'none' : 'blur(10px)',
+              transform: isRevealed ? 'scale(1)' : 'scale(1.08)',
+              transition: 'filter 0.6s ease-in-out, -webkit-filter 0.6s ease-in-out, transform 0.6s ease-in-out',
+            }}
             loading="eager"
           />
 
