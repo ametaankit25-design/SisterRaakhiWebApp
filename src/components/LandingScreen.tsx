@@ -22,20 +22,16 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
           <Sparkles className="w-3.5 h-3.5" /> Happy Raksha Bandhan <Sparkles className="w-3.5 h-3.5" />
         </div>
 
-        {/* Real Sibling Portrait / Festive photo */}
-        <div className="relative w-full aspect-[4/3] sm:h-64 overflow-hidden bg-slate-900 flex items-center justify-center">
+        {/* Happy Raksha Bandhan Festive Family Artwork */}
+        <div className="relative w-full aspect-[4/3] sm:h-72 overflow-hidden bg-rose-50 flex items-center justify-center">
           <img
-            src="/photos/PXL_20230531_205855074.PORTRAIT.jpg"
-            onError={(e) => {
-              // Fallback to festive photo if needed
-              (e.target as HTMLImageElement).src = '/photos/IMG_20230403_165757312.jpg';
-            }}
-            alt="Rakhi Celebrations"
-            className="w-full h-full object-cover"
+            src="/photos/happy-rakshabandhan-illustration-sister-.jpg"
+            alt="Happy Raksha Bandhan Celebration"
+            className="w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Overlay gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent flex flex-col justify-end p-4 text-left">
+          {/* Overlay gradient for clean text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/15 to-transparent flex flex-col justify-end p-4 text-left">
             <span className="text-amber-300 font-semibold text-[11px] tracking-wider uppercase flex items-center gap-1">
               ✨ Special Gift Mission
             </span>
