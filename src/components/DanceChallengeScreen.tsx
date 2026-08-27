@@ -39,8 +39,8 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
             sounds.stopDanceBeats();
             sounds.playSuccess();
             confetti({
-              particleCount: 120,
-              spread: 80,
+              particleCount: 100,
+              spread: 70,
               origin: { y: 0.5 },
               colors: ['#FF4D8D', '#F59E0B', '#10B981', '#7C3AED', '#EC4899'],
             });
@@ -109,32 +109,32 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
   const currentMove = config.danceMoves[currentMoveIndex];
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-4 flex flex-col items-center animate-fadeIn">
+    <div className="w-full flex flex-col items-center animate-fadeIn">
       {/* Header */}
       <div className="text-center mb-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-black uppercase tracking-wider mb-1.5 border border-amber-300">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-[11px] font-black uppercase tracking-wider mb-1 border border-amber-300">
           <Flame className="w-3.5 h-3.5 text-orange-500" /> Challenge 2 of 2
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
           💃 {config.title}
         </h2>
-        <p className="text-xs text-slate-600 mt-1 max-w-xs mx-auto">
+        <p className="text-xs text-slate-600 mt-0.5 max-w-xs mx-auto">
           {config.subtitle}
         </p>
       </div>
 
       {/* Tab Pause Alert */}
       {isTabInactive && !isCompleted && (
-        <div className="w-full p-3 rounded-2xl bg-amber-500/90 text-white text-xs font-bold mb-3 flex items-center gap-2 shadow-md animate-pulse">
+        <div className="w-full p-3 rounded-2xl bg-amber-500 text-white text-xs font-bold mb-3 flex items-center gap-2 shadow-md">
           <ShieldAlert className="w-4 h-4 shrink-0" />
-          <span>Hey! You left the tab. Challenge paused. Resume to keep dancing!</span>
+          <span>Challenge paused while away. Resume to continue!</span>
         </div>
       )}
 
       {/* Main Dance Card */}
-      <div className="glass-panel w-full rounded-3xl p-5 shadow-xl border border-amber-200/80 mb-4 relative">
+      <div className="glass-panel w-full rounded-3xl p-4 sm:p-5 shadow-xl border border-amber-200 mb-4 relative">
         {/* Video / Visualizer Player */}
-        <div className="relative w-full rounded-2xl overflow-hidden shadow-md border-2 border-amber-300 bg-slate-950 aspect-video mb-4 flex items-center justify-center">
+        <div className="relative w-full rounded-2xl overflow-hidden shadow-sm border border-amber-300 bg-slate-950 aspect-video mb-3.5 flex items-center justify-center">
           {isActive ? (
             <iframe
               className="w-full h-full object-cover"
@@ -144,14 +144,14 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
               allowFullScreen
             />
           ) : (
-            <div className="relative w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-tr from-slate-950 via-purple-950 to-slate-900">
-              <div className="w-14 h-14 rounded-full bg-rose-500/90 text-white flex items-center justify-center text-2xl shadow-lg mb-2 border-2 border-white/40 animate-pulse">
+            <div className="relative w-full h-full flex flex-col items-center justify-center p-3 text-center bg-gradient-to-tr from-slate-950 via-purple-950 to-slate-900">
+              <div className="w-12 h-12 rounded-full bg-rose-500 text-white flex items-center justify-center text-xl shadow-md mb-1.5 border border-white/40 animate-pulse">
                 💃
               </div>
-              <span className="text-white font-bold text-sm">
+              <span className="text-white font-bold text-xs sm:text-sm">
                 Festive Dance Arena Ready
               </span>
-              <span className="text-amber-300 text-xs mt-0.5 font-medium">
+              <span className="text-amber-300 text-[11px] mt-0.5 font-medium">
                 {testMode ? '⚡ Fast 10-Second Demo Active' : '⏱️ 10:00 Full Challenge'}
               </span>
             </div>
@@ -159,16 +159,16 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
         </div>
 
         {/* 10-Minute Countdown Clock */}
-        <div className="bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl p-4 text-center text-white shadow-inner border border-slate-700 mb-4">
-          <div className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1 flex items-center justify-center gap-1">
+        <div className="bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl p-3.5 text-center text-white shadow-inner border border-slate-700 mb-3.5">
+          <div className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-0.5 flex items-center justify-center gap-1">
             <Music2 className="w-3 h-3 text-amber-400" /> Time Remaining
           </div>
-          <div className="text-4xl sm:text-5xl font-black font-mono tracking-wider text-amber-300 drop-shadow-sm">
+          <div className="text-3xl sm:text-4xl font-black font-mono tracking-wider text-amber-300 drop-shadow-sm">
             {formatTime(timeLeft)}
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-slate-800 rounded-full h-2.5 mt-3 overflow-hidden border border-slate-700">
+          <div className="w-full bg-slate-800 rounded-full h-2 mt-2.5 overflow-hidden border border-slate-700">
             <div
               className="h-full bg-gradient-to-r from-amber-400 via-rose-500 to-emerald-400 rounded-full transition-all duration-300"
               style={{ width: `${progressPct}%` }}
@@ -177,7 +177,7 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
 
           {/* Cheer message */}
           {isActive && (
-            <div className="mt-3 text-xs font-bold text-yellow-200 animate-bounce-slow">
+            <div className="mt-2 text-xs font-bold text-yellow-200">
               {config.cheerMessages[currentCheerIndex]}
             </div>
           )}
@@ -185,18 +185,18 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
 
         {/* Active Dance Move Card */}
         {isActive && currentMove && (
-          <div className="bg-amber-50 rounded-2xl p-3.5 border border-amber-200 mb-4 flex items-center gap-3">
-            <div className="text-3xl shrink-0 p-2 bg-white rounded-xl shadow-xs">
+          <div className="bg-amber-50 rounded-2xl p-3 border border-amber-200 mb-3.5 flex items-center gap-2.5">
+            <div className="text-2xl shrink-0 p-1.5 bg-white rounded-xl shadow-xs">
               {currentMove.emoji}
             </div>
             <div className="text-left">
-              <div className="text-[11px] font-bold text-amber-800 uppercase tracking-wider">
+              <div className="text-[10px] font-bold text-amber-800 uppercase tracking-wider">
                 Current Move:
               </div>
-              <div className="text-sm font-extrabold text-slate-900">
+              <div className="text-xs sm:text-sm font-extrabold text-slate-900">
                 {currentMove.name}
               </div>
-              <div className="text-xs text-slate-600">
+              <div className="text-[11px] text-slate-600">
                 {currentMove.hint}
               </div>
             </div>
@@ -205,20 +205,20 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
 
         {/* Completion Announcement */}
         {isCompleted && (
-          <div className="p-4 rounded-2xl bg-emerald-100 border-2 border-emerald-400 text-emerald-950 mb-4 text-center animate-bounce-slow">
+          <div className="p-3.5 rounded-2xl bg-emerald-100 border-2 border-emerald-400 text-emerald-950 mb-3.5 text-center animate-fadeIn">
             <div className="text-2xl mb-1">🎉</div>
-            <h3 className="font-extrabold text-base text-emerald-900">
+            <h3 className="font-extrabold text-sm sm:text-base text-emerald-900">
               YOU SURVIVED THE DANCE TRIAL!
             </h3>
-            <p className="text-xs text-emerald-800 font-semibold mt-1 mb-3">
-              Full 10 minutes verified. Sibling honor certified! ✓
+            <p className="text-xs text-emerald-800 font-semibold mt-0.5 mb-2.5">
+              10 minutes completed. Sibling honor certified! ✓
             </p>
             <button
               onClick={() => {
                 sounds.playUnlock();
                 onPassDance();
               }}
-              className="shimmer-btn w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 text-white font-black text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2"
+              className="shimmer-btn w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 text-white font-black text-xs sm:text-sm shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <span>UNLOCK MY GIFT LOCATION 🔓</span>
               <ArrowRight className="w-4 h-4" />
@@ -228,19 +228,19 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
 
         {/* Start / Pause Controls */}
         {!isCompleted && (
-          <div className="flex gap-2.5">
+          <div className="flex gap-2">
             {!isActive ? (
               <button
                 onClick={handleStart}
-                className="shimmer-btn flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-600 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black text-base shadow-lg shadow-rose-500/25 active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="shimmer-btn flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-600 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black text-sm sm:text-base shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
               >
-                <Play className="w-5 h-5 fill-current" />
+                <Play className="w-4 h-4 fill-current" />
                 <span>{timeLeft < totalTime ? 'RESUME DANCE' : 'START DANCE CHALLENGE'}</span>
               </button>
             ) : (
               <button
                 onClick={handlePause}
-                className="flex-1 py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
+                className="flex-1 py-3.5 px-4 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <Pause className="w-4 h-4" />
                 <span>PAUSE CHALLENGE</span>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { config as defaultConfig, type AppConfig } from './config';
 import { FestiveBackground } from './components/FestiveBackground';
 import { Header } from './components/Header';
@@ -24,7 +24,12 @@ export function App() {
   const [appConfig] = useState<AppConfig>(defaultConfig);
   const [currentStep, setCurrentStep] = useState<FlowStep>('landing');
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [testMode, setTestMode] = useState<boolean>(true); // Default true for fast previewing, easily toggleable
+  const [testMode, setTestMode] = useState<boolean>(true); // Fast demo toggle
+
+  // Automatically scroll to top whenever changing steps for smooth mobile UX
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentStep]);
 
   const handleToggleMute = () => {
     const muted = sounds.toggleMute();
@@ -61,13 +66,13 @@ export function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-900 flex flex-col justify-between font-sans selection:bg-rose-500 selection:text-white">
+    <div className="relative min-h-screen bg-gradient-to-br from-amber-50 via-rose-50 to-purple-50 flex flex-col font-sans selection:bg-rose-500 selection:text-white">
       {/* Dynamic Festive Background */}
       <FestiveBackground />
 
-      {/* Main Wrapper */}
+      {/* Main Content Container with standard vertical scroll */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Sticky App Header with sibling details, progress, sound & demo controls */}
+        {/* Sticky App Header */}
         <Header
           sisterName={appConfig.sisterName}
           step={currentStep}
@@ -77,8 +82,8 @@ export function App() {
           onToggleTestMode={handleToggleTestMode}
         />
 
-        {/* Content Screens */}
-        <main className="flex-1 flex items-center justify-center p-3 sm:p-6">
+        {/* Scrollable Content Area */}
+        <main className="flex-1 w-full max-w-md mx-auto px-3 sm:px-4 py-4 pb-20">
           {currentStep === 'landing' && (
             <LandingScreen
               sisterName={appConfig.sisterName}
@@ -127,7 +132,7 @@ export function App() {
         </main>
 
         {/* Festive Footer */}
-        <footer className="w-full text-center py-3 text-[11px] text-slate-500 font-medium z-10 border-t border-rose-100/50 bg-white/40 backdrop-blur-xs">
+        <footer className="w-full text-center py-3.5 px-4 text-[11px] text-slate-500 font-medium border-t border-rose-200/50 bg-white/70 backdrop-blur-xs mt-auto">
           Made with ❤️ by {appConfig.brotherName} for {appConfig.sisterName} • Happy Raksha Bandhan 2026
         </footer>
       </div>
