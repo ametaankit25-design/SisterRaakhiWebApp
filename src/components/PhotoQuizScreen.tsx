@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Camera, CheckCircle2, XCircle, ArrowRight, RotateCcw, Sparkles } from 'lucide-react';
+import { Camera, CheckCircle2, XCircle, ArrowRight, RotateCcw, Sparkles, Eye } from 'lucide-react';
 import type { AppConfig } from '../config';
 import { sounds } from '../utils/audio';
 
@@ -18,6 +18,8 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
   const currentQuestion = config.questions[currentQuestionIndex];
   const totalQuestions = config.questions.length;
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+
+  const isRevealed = status === 'correct';
 
   const handleSubmit = () => {
     if (!selectedOption || !currentQuestion) return;
@@ -95,25 +97,43 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
           📸 {config.title}
         </h2>
         <p className="text-xs text-slate-600 mt-0.5">
-          {currentQuestion.description}
+          {isRevealed
+            ? '✨ Photo Unblurred! Look at that glorious memory!'
+            : '🔎 The photo is blurred! Guess correctly to unblur & reveal!'}
         </p>
       </div>
 
       {/* Quiz Card */}
       <div className="glass-panel w-full rounded-3xl p-4 sm:p-5 shadow-xl border border-rose-100 mb-4 relative">
-        {/* Photo Container */}
-        <div className="relative w-full aspect-[16/10] sm:h-56 rounded-2xl overflow-hidden shadow-inner border-2 border-rose-200 mb-3.5 bg-slate-900 flex items-center justify-center">
+        {/* Photo Container with Mystery Blur effect */}
+        <div className="relative w-full aspect-[16/10] sm:h-56 rounded-2xl overflow-hidden shadow-inner border-2 border-rose-200 mb-3.5 bg-slate-950 flex items-center justify-center">
           <img
             key={currentQuestion.photoUrl}
             src={currentQuestion.photoUrl}
             alt={`Quiz Photo ${currentQuestionIndex + 1}`}
-            className="w-full h-full object-cover animate-fadeIn"
+            className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+              isRevealed
+                ? 'filter-none scale-100'
+                : 'filter blur-md scale-105 brightness-90'
+            }`}
             loading="eager"
           />
-          {/* Subtle watermark badge */}
-          <div className="absolute bottom-2 right-2 bg-slate-900/80 backdrop-blur-sm text-yellow-300 text-[10px] font-bold px-2 py-0.5 rounded-md border border-yellow-400/30">
-            🔒 Trial Photo #{currentQuestionIndex + 1}
-          </div>
+
+          {/* Mystery / Revealed Badge overlay */}
+          {!isRevealed ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/20 backdrop-blur-[2px] pointer-events-none p-3 text-center">
+              <div className="px-3 py-1 rounded-full bg-slate-950/75 border border-yellow-400/40 text-yellow-300 text-xs font-bold shadow-md flex items-center gap-1.5 animate-pulse">
+                <Eye className="w-3.5 h-3.5" /> Mystery Photo Locked 🔒
+              </div>
+              <span className="text-[10px] text-white/90 font-semibold drop-shadow-md mt-1">
+                (Select correct answer to reveal)
+              </span>
+            </div>
+          ) : (
+            <div className="absolute top-2.5 right-2.5 bg-emerald-600/90 backdrop-blur-sm text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg border border-emerald-300 shadow-md animate-bounce-slow flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-yellow-200" /> Photo Unlocked!
+            </div>
+          )}
         </div>
 
         {/* Question Title */}
@@ -192,7 +212,7 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
           </div>
         )}
 
-        {/* Correct Success Callout */}
+        {/* Correct Success Callout with Unblurred Photo Celebration */}
         {status === 'correct' && (
           <div className="p-3.5 rounded-2xl bg-emerald-100 border-2 border-emerald-300 text-emerald-950 mb-3.5 animate-fadeIn">
             <div className="flex items-center gap-1.5 font-black text-xs sm:text-sm text-emerald-800 mb-1">
@@ -223,7 +243,7 @@ export const PhotoQuizScreen: React.FC<PhotoQuizScreenProps> = ({ config, onPass
                 : 'bg-slate-200 text-slate-400 cursor-not-allowed'
             }`}
           >
-            <span>SUBMIT ANSWER</span>
+            <span>SUBMIT & UNBLUR PHOTO</span>
             <Sparkles className="w-4 h-4" />
           </button>
         )}

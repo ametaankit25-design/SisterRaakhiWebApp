@@ -22,10 +22,14 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
           <Sparkles className="w-3.5 h-3.5" /> Happy Raksha Bandhan <Sparkles className="w-3.5 h-3.5" />
         </div>
 
-        {/* Festive Rakhi illustration */}
-        <div className="relative w-full aspect-[4/3] sm:h-64 overflow-hidden bg-rose-50 flex items-center justify-center">
+        {/* Real Sibling Portrait / Festive photo */}
+        <div className="relative w-full aspect-[4/3] sm:h-64 overflow-hidden bg-slate-900 flex items-center justify-center">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4-03o01Jd1l5zL3xJ3O35U-QjG7kO7tG9Gg&s"
+            src="/photos/PXL_20230531_205855074.PORTRAIT.jpg"
+            onError={(e) => {
+              // Fallback to festive photo if needed
+              (e.target as HTMLImageElement).src = '/photos/IMG_20230403_165757312.jpg';
+            }}
             alt="Rakhi Celebrations"
             className="w-full h-full object-cover"
             loading="eager"

@@ -1,5 +1,5 @@
 // Raksha Bandhan Gift Challenge Configuration
-// You can customize all texts, photos, dance challenge duration, and gift location here!
+// Configured with your personal photos from /photos/ folder!
 
 export interface QuizQuestion {
   id: number;
@@ -59,37 +59,37 @@ export const config: AppConfig = {
 
   photoQuiz: {
     title: "The 5-Photo Sibling Memory Trial 📸",
-    description: "Answer all 5 photo questions correctly to prove you're the real sister!",
+    description: "Look at the real photos from our memories and pick the right answer!",
     questions: [
       {
         id: 1,
-        photoUrl: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1000&q=80",
+        photoUrl: "/photos/IMG_20230403_165757312.jpg",
         question: "1. Who is this handsome mastermind in this memory?",
         description: "Exhibit 1: Look closely at this legendary photo...",
         options: [
           { id: "A", label: "Your favorite & most generous brother (Ankit)", subtitle: "The one who always saves you from scoldings" },
-          { id: "B", label: "A Bollywood superstar on vacation", subtitle: "Looks like one, but guess again!" },
+          { id: "B", label: "A Bollywood superstar on holiday", subtitle: "Looks like one, but guess again!" },
           { id: "C", label: "A random handsome stranger with high IQ", subtitle: "Flattering, but pick the official title!" },
           { id: "D", label: "Your personal 24/7 snack delivery agent", subtitle: "True, but pick option A!" },
         ],
         correctAnswerId: "A",
-        successMessage: "🎉 Correct! Okay, maybe you actually recognize your brother.",
+        successMessage: "🎉 Correct! Okay, you recognized your brother in Photo #1!",
         wrongMessages: [
-          "😂 WRONG! Seriously, sis? Your gift is judging you right now.",
+          "😂 WRONG! Seriously, sis? Look at the photo again!",
           "👀 Are you blind? That's your one and only brother! Try again.",
           "🤦‍♂️ Don't make me deduct 20% of your gift value! Guess right!"
         ]
       },
       {
         id: 2,
-        photoUrl: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80",
+        photoUrl: "/photos/IMG_20230524_103516594.jpg",
         question: "2. What is brother Ankit's #1 superpower when you are in trouble?",
         description: "Exhibit 2: Sibling emergency defense protocol...",
         options: [
           { id: "A", label: "Secretly bringing snacks & backing you up against mom", subtitle: "The ultimate sibling shield!" },
           { id: "B", label: "Saying 'I told you so' exactly 50 times", subtitle: "He might tease, but he saves you first" },
           { id: "C", label: "Blaming the innocent house cat", subtitle: "A good tactic, but not the main superpower" },
-          { id: "D", label: "Disappearing into thin air", subtitle: "Never! He's always there" },
+          { id: "D", label: "Disappearing into thin air", subtitle: "Never! He's always got your back" },
         ],
         correctAnswerId: "A",
         successMessage: "🌟 Bingo! That's what brothers are for!",
@@ -101,7 +101,7 @@ export const config: AppConfig = {
       },
       {
         id: 3,
-        photoUrl: "https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?auto=format&fit=crop&w=1000&q=80",
+        photoUrl: "/photos/IMG_20230529_183743713.jpg",
         question: "3. Who always ends up winning the TV remote / snack battle at home?",
         description: "Exhibit 3: The eternal household battle...",
         options: [
@@ -120,7 +120,7 @@ export const config: AppConfig = {
       },
       {
         id: 4,
-        photoUrl: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=1000&q=80",
+        photoUrl: "/photos/IMG_20230529_190348338.jpg",
         question: "4. What is the official Rakhi tax rate Ankit owes you today?",
         description: "Exhibit 4: Financial negotiations under section 420...",
         options: [
@@ -139,7 +139,7 @@ export const config: AppConfig = {
       },
       {
         id: 5,
-        photoUrl: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=1000&q=80",
+        photoUrl: "/photos/IMG_20231129_072341931.jpg",
         question: "5. No matter how much we tease each other, who is your forever protector & favorite brother?",
         description: "Exhibit 5: The final bond verification...",
         options: [
@@ -149,7 +149,7 @@ export const config: AppConfig = {
           { id: "D", label: "My favorite bedroom pillow", subtitle: "Comfy, but not family!" },
         ],
         correctAnswerId: "A",
-        successMessage: "🎉 5/5 PERFECT SCORE! You have officially conquered the Photo Trial!",
+        successMessage: "🎉 5/5 PERFECT SCORE! You have officially conquered all 5 Photo Trials!",
         wrongMessages: [
           "💔 Ouch! That hurt brother's feelings! Pick the right one!",
           "🥺 Seriously? After all these years? Try again!",
