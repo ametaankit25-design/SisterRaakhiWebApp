@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Pause, Flame, Music2, ArrowRight, ShieldAlert, Lock, Unlock, Sparkles, Video, Download, Camera, Volume2 } from 'lucide-react';
+import { Pause, Flame, Music2, ArrowRight, ShieldAlert, Lock, Unlock, Sparkles, Video, Download, Camera, Volume2, SkipForward } from 'lucide-react';
 import type { AppConfig } from '../config';
 import { sounds } from '../utils/audio';
 
@@ -471,24 +471,46 @@ export const DanceChallengeScreen: React.FC<DanceChallengeScreenProps> = ({
 
         {/* Start / Pause Controls */}
         {!isCompleted && (
-          <div className="flex gap-2">
-            {!isActive ? (
-              <button
-                onClick={handleStart}
-                className="shimmer-btn flex-1 py-4 px-4 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-600 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black text-sm sm:text-base shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
-              >
-                <Music2 className="w-4 h-4" />
-                <span>{timeLeft < totalTime ? 'RESUME SONG & DANCE' : 'START DANCE CHALLENGE 🎶'}</span>
-              </button>
-            ) : (
-              <button
-                onClick={handlePause}
-                className="flex-1 py-4 px-4 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
-              >
-                <Pause className="w-4 h-4" />
-                <span>PAUSE MUSIC & RECORDING</span>
-              </button>
-            )}
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2">
+              {!isActive ? (
+                <button
+                  onClick={handleStart}
+                  className="shimmer-btn flex-1 py-4 px-4 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-600 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black text-sm sm:text-base shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
+                >
+                  <Music2 className="w-4 h-4" />
+                  <span>{timeLeft < totalTime ? 'RESUME SONG & DANCE' : 'START DANCE CHALLENGE 🎶'}</span>
+                </button>
+              ) : (
+                <button
+                  onClick={handlePause}
+                  className="flex-1 py-4 px-4 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm shadow-md active:scale-95 transition-all flex items-center justify-center gap-2"
+                >
+                  <Pause className="w-4 h-4" />
+                  <span>PAUSE MUSIC & RECORDING</span>
+                </button>
+              )}
+            </div>
+
+            {/* Pass Button — skip challenge & unlock gift directly */}
+            <button
+              id="pass-dance-challenge-btn"
+              onClick={() => {
+                sounds.playClick();
+                // Stop audio & recording if active
+                if (audioPlayerRef.current) audioPlayerRef.current.pause();
+                if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+                  mediaRecorderRef.current.stop();
+                }
+                sounds.stopDanceBeats();
+                onPassDance();
+              }}
+              className="w-full py-3 px-4 rounded-2xl border-2 border-dashed border-slate-300 bg-white/60 hover:bg-rose-50 hover:border-rose-400 text-slate-500 hover:text-rose-700 font-bold text-xs sm:text-sm transition-all active:scale-95 flex items-center justify-center gap-2 group"
+            >
+              <SkipForward className="w-4 h-4 group-hover:text-rose-500 transition-colors" />
+              <span>Pass Challenge &amp; Unlock Gift Location</span>
+              <span className="text-lg">🎁</span>
+            </button>
           </div>
         )}
       </div>
